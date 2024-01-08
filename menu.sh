@@ -17,6 +17,9 @@ YELL='\033[0;33m'
 #INTALLER-UDP
 domain=$(cat /etc/xray/domain)
 nsdomain=$(cat /etc/xray/dns)
+ISP=$(cat /root/.isp)
+CITY=$(cat /root/.city)
+
 RAM=$(free -m | awk 'NR==2 {print $2}')
 USAGERAM=$(free -m | awk 'NR==2 {print $3}')
 MEMOFREE=$(printf '%-1s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
