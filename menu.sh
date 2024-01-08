@@ -53,7 +53,7 @@ DATE=$(date +'%Y-%m-%d')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-    echo -e "$COLOR1 $NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
+
 }
 mai="datediff "$Exp" "$DATE""
 
@@ -171,8 +171,8 @@ sudo echo 3 > /proc/sys/vm/drop_caches
 run_exp () {
 xp
 }
-echo -e " "
-#figlet  MyRidwanVPN  | lolcat
+
+
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}"
 echo -e " ${YELL}│$NC\033[41mANGGUN_TUNNEL PREMIUM $NC${YELL}│$NC"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
