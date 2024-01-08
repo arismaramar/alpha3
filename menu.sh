@@ -15,9 +15,6 @@ grenbo="\e[92;1m"
 purple="\033[1;95m"
 YELL='\033[0;33m'
 #INTALLER-UDP
-ISP=$(cat /etc/xray/isp)
-CITY=$(cat /etc/xray/city)
-IPVPS=$(curl -s ipv4.icanhazip.com)
 domain=$(cat /etc/xray/domain)
 RAM=$(free -m | awk 'NR==2 {print $2}')
 USAGERAM=$(free -m | awk 'NR==2 {print $3}')
@@ -436,6 +433,7 @@ run_exp
 menu
 ;;
 *)
+echo -e ""
 run_cc
 run_exp
 menu
