@@ -436,7 +436,6 @@ run_exp
 menu
 ;;
 *)
-echo -e ""
 run_cc
 run_exp
 menu
