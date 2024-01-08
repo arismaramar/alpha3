@@ -222,7 +222,7 @@ echo -e " ${z}│$NC$y Expiry script$NC ${Blue}=$green $exp$NC($r $certifacate $
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
 echo
 read -p " ☞︎︎︎ 𝙎𝙞𝙡𝙖𝙝𝙠𝙖𝙣 𝙋𝙞𝙡𝙞𝙝 𝙈𝙚𝙣𝙪 𝘿𝙞𝙖𝙩𝙖𝙨 : " opt
-echo -e ""
+
 case $opt in
 1 | 01)
 clear
@@ -361,7 +361,7 @@ run_exp
 echo -e "${green}ANDA YAKIN UNTUK MEMASANG SCRIPT INI ? $NC"
 echo -e "${green}MINIMAL RAM 2 GB BIAR DISK TIDAK FULL $NC"
 echo -e "${green}OS SUPPORT UBUNTU 20.04 ONLY $NC"
-echo -e ""
+
 read -p "SUDAH LAPOR KE ADMIN ? [Y/N]:" arg
 if [[ $arg == 'Y' ]]; then
   echo -e "${Blue}Tindakan Diteruskan! $NC"
@@ -433,7 +433,7 @@ run_exp
 menu
 ;;
 *)
-echo -e ""
+
 run_cc
 run_exp
 menu
