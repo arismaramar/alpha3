@@ -35,7 +35,8 @@ run_izin() {
   sysctl -w net.ipv6.conf.default.disable_ipv6=1 >/dev/null 2>&1
   
   # Link izin IP VPS
-  url_izin= "https://raw.githubusercontent.com/arismaramar/izin/main/ip"
+
+  url_izin='https://raw.githubusercontent.com/arismaramar/izin/main/izin.txt'
 
   # Mendapatkan IP VPS saat ini
   ip_vps=$(curl -s ifconfig.me)
@@ -122,7 +123,7 @@ ISP=$(cat /root/.myisp)
 CITY=$(cat /root/.mycity)
 DATE2=$(date -R | cut -d " " -f -5)
 IPVPS=$(cat /root/.myip)
-UPDATE= "https://raw.githubusercontent.com/arismaramar/izin/main/ip"
+UPDATE="https://raw.githubusercontent.com/arismaramar/izin/main/"
 clear
 #Download/Upload today
 dtoday="$(vnstat -i eth0 | grep "today" | awk '{print $2" "substr ($3, 1, 1)}')"
