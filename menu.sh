@@ -16,6 +16,7 @@ purple="\033[1;95m"
 YELL='\033[0;33m'
 #INTALLER-UDP
 domain=$(cat /etc/xray/domain)
+nsdomain=$(cat /etc/xray/dns)
 RAM=$(free -m | awk 'NR==2 {print $2}')
 USAGERAM=$(free -m | awk 'NR==2 {print $3}')
 MEMOFREE=$(printf '%-1s' "$(free -m | awk 'NR==2{printf "%.2f%%", $3*100/$2 }')")
@@ -31,12 +32,12 @@ echo ""
 #########################
 # USERNAME
 rm -f /usr/bin/user
-username=$(curl data_ip="https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $2}')
+username=$(curl https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $2}')
 
 echo "$username" >/usr/bin/user
 # validity
 rm -f /usr/bin/e
-valid=$(curl data_ip="https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $3}')
+valid=$(curl https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $3}')
 
 echo "$valid" >/usr/bin/e
 # DETAIL ORDER
@@ -53,15 +54,15 @@ DATE=$(date +'%Y-%m-%d')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-
+    echo -e "$COLOR1 $NC Expiry In   : $(( (d1 - d2) / 86400 )) Days"
 }
 mai="datediff "$Exp" "$DATE""
 
-# Status ExpiRED Active | ANGGUN  Project
+# Status ExpiRED Active | Geo Project
 Info="(${green}Active${NC})"
 Error="(${RED}ExpiRED${NC})"
 today=`date -d "0 days" +"%Y-%m-%d"`
-Exp1=$(curl data_ip="https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $3}')
+Exp1=$(curl https://raw.githubusercontent.com/arismaramar/izin/main/ip | grep $MYIP | awk '{print $3}')
 
 if [[ $today < $Exp1 ]]; then
 sts="${Info}"
@@ -74,17 +75,13 @@ clear
 # OS Uptime
 uptime="$(uptime -p | cut -d " " -f 2-10)"
 
-# Getting CPU Information | ANGGUN  Project
+# Getting CPU Information | ANGGUN_TUNNEL
 cpu_usage1="$(ps aux | awk 'BEGIN {sum=0} {sum+=$3}; END {print sum}')"
 cpu_usage="$((${cpu_usage1/\.*} / ${coREDiilik:-1}))"
 cpu_usage+=" %"
-ISP=$(cat /etc/xray/isp)
-CITY=$(cat /etc/xray/city)
-WKT=$(curl /etc/xray/timezone )
 DAY=$(date +%A)
 DATE=$(date +%m/%d/%Y)
 DATE2=$(date -R | cut -d " " -f -5)
-IPVPS=$(curl -s ipv4.icanhazip.com )
 cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
 cores=$( awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo )
 freq=$( awk -F: ' /cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
@@ -97,7 +94,7 @@ dropbear_service=$(/etc/init.d/dropbear status | grep Active | awk '{print $3}' 
 haproxy_service=$(systemctl status haproxy | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 xray_service=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 nginx_service=$(systemctl status nginx | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-#Status | ANGGUN  Project
+#Status | Geo Project
 clear
 # STATUS SERVICE  SSH 
 if [[ $ssh_service == "running" ]]; then 
@@ -171,21 +168,18 @@ sudo echo 3 > /proc/sys/vm/drop_caches
 run_exp () {
 xp
 }
-
-
-echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${YELL}│$NC\033[41mANGGUN_TUNNEL PREMIUM $NC${YELL}│$NC"
-echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
-echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y System OS ${NC}     $Blue=$NC $MODEL${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y Server RAM ${NC}    $Blue=$NC $RAM MB $NC"
-echo -e " ${z}│$NC$r ⇲ $NC$y USAGE RAM ${NC}     $Blue=$NC $USAGERAM MB $NC"
-echo -e " ${z}│$NC$r ⇲ $NC$y CPU---LOAD ${NC}    $Blue=$NC $LOADCPU % $NC"
-echo -e " ${z}│$NC$r ⇲ $NC$y Name ISP ${NC}      $Blue=$NC $ISP${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y CITY ${NC}          $Blue=$NC $CITY${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y IP VPS${NC}         $Blue=$NC $IPVPS${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y DOMAIN ${NC}        $Blue=$NC $domain${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC$y UPTIME ${NC}        $Blue=$NC $SERONLINE${NC}"
+echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | lolcat
+echo -e "                 • ANGGUN PREMIUM •                 "
+echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | lolcat
+echo -e "\e[33m OS            \e[0m:  "`hostnamectl | grep "Operating System" | cut -d ' ' -f5-`
+echo -e "\e[33m IP            \e[0m:  $IP"
+echo -e "\e[33m RAM           \e[0m:  $uram MB / $tram MB"
+echo -e "\e[33m ISP           \e[0m:  $(cat /root/.isp)"
+echo -e "\e[33m CITY          \e[0m:  $(cat /root/.city)"
+echo -e "\e[33m DOMAIN        \e[0m:  $(cat /etc/xray/domain)"
+echo -e "\e[33m DATE & TIME   \e[0m:  $DATE2"
+echo -e "\e[33m UPTIME        \e[0m:  $uptime"
+echo -e "\e[33m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | lolcat
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
 echo -e "                ${KIRI} ${purple}𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟 𝔸𝕔𝕔𝕠𝕦𝕟𝕥${NC} ${KANAN}"
 echo -e "       ───────────────────────────────────────────────${NC}" | lolcat 
@@ -213,16 +207,16 @@ echo -e " ${z}│                                                          $NC${
 echo -e " ${z}│$NC [${r}00${NC}]$purple BACK TO EXIT MENU$NC ${KANAN} \E[0m\033[0;34m                              $NC${z}│$NC"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${z}│$NC$y Version$NC       ${Blue}=$NC$Y V3.0"
-echo -e " ${z}│$NC$y Provider$NC      ${Blue}=$NC$RED ANGGUN_TUNNEL PREMIUM"
-echo -e " ${z}│$NC$y Whatsapp$NC      ${Blue}=$NC$purple 6285365581599"
+echo -e " ${z}│$NC$y Version$NC       ${Blue}=$NC$Y V3.2"
+echo -e " ${z}│$NC$y Provider$NC      ${Blue}=$NC$RED ANGGUN_TUNNEL"
+echo -e " ${z}│$NC$y Whatsapp$NC      ${Blue}=$NC$purple 085365581599 "
 echo -e " ${z}│$NC$y User Buyer$NC    ${Blue}=$NC$purple $username"
 echo -e " ${z}│$NC$y Script Status$NC ${Blue}=$NC $sts "
 echo -e " ${z}│$NC$y Expiry script$NC ${Blue}=$green $exp$NC($r $certifacate ${NC}Days )"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
 echo
 read -p " ☞︎︎︎ 𝙎𝙞𝙡𝙖𝙝𝙠𝙖𝙣 𝙋𝙞𝙡𝙞𝙝 𝙈𝙚𝙣𝙪 𝘿𝙞𝙖𝙩𝙖𝙨 : " opt
-
+echo -e ""
 case $opt in
 1 | 01)
 clear
@@ -361,7 +355,7 @@ run_exp
 echo -e "${green}ANDA YAKIN UNTUK MEMASANG SCRIPT INI ? $NC"
 echo -e "${green}MINIMAL RAM 2 GB BIAR DISK TIDAK FULL $NC"
 echo -e "${green}OS SUPPORT UBUNTU 20.04 ONLY $NC"
-
+echo -e ""
 read -p "SUDAH LAPOR KE ADMIN ? [Y/N]:" arg
 if [[ $arg == 'Y' ]]; then
   echo -e "${Blue}Tindakan Diteruskan! $NC"
@@ -391,7 +385,7 @@ else
 fi
 ##########
 clear
-wget https://raw.githubusercontent.com/Rerechan02/UDP/main/ssh/udp.sh && chmod +x udp.sh && ./udp.sh
+wget --load-cookies /tmp/cookies.txt ${UDPX} -O install-udp && rm -rf /tmp/cookies.txt && chmod +x install-udp && ./install-udp
 ;;
 21)
 clear
@@ -433,7 +427,7 @@ run_exp
 menu
 ;;
 *)
-
+echo -e ""
 run_cc
 run_exp
 menu
